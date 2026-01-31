@@ -1,43 +1,50 @@
-const express = require('express');
-let books = require("./booksdb.js");
-let isValid = require("./auth_users.js").isValid;
-let users = require("./auth_users.js").users;
-const public_users = express.Router();
+const axios = require("axios");
 
+const BASE_URL = "http://localhost:5000";
 
-public_users.post("/register", (req,res) => {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
-});
+/* Get all books */
+async function getAllBooks() {
+  const response = await axios.get(`${BASE_URL}/books`);
+  return response.data;
+}
 
-// Get the book list available in the shop
-public_users.get('/',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
-});
+/* Get book by ISBN */
+async function getByISBN(isbn) {
+  const response = await axios.get(`${BASE_URL}/books`);
+  return response.data[isbn];
+}
 
-// Get book details based on ISBN
-public_users.get('/isbn/:isbn',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
- });
-  
-// Get book details based on author
-public_users.get('/author/:author',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
-});
+/* Get books by Author */
+async function getByAuthor(author) {
+  const response = await axios.get(`${BASE_URL}/books`);
+  const books = response.data;
 
-// Get all books based on title
-public_users.get('/title/:title',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
-});
+  const result = [];
+  for (const key in books) {
+    if (books[key].author === author) {
+      result.push(books[key]);
+    }
+  }
+  return result;
+}
 
-//  Get book review
-public_users.get('/review/:isbn',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
-});
+/* Get books by Title */
+async function getByTitle(title) {
+  const response = await axios.get(`${BASE_URL}/books`);
+  const books = response.data;
 
-module.exports.general = public_users;
+  const result = [];
+  for (const key in books) {
+    if (books[key].title === title) {
+      result.push(books[key]);
+    }
+  }
+  return result;
+}
+
+module.exports = {
+  getAllBooks,
+  getByISBN,
+  getByAuthor,
+  getByTitle,
+};
