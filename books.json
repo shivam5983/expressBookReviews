@@ -1,0 +1,16 @@
+{
+  "9780001": {
+    "isbn": "9780001",
+    "title": "Node Basics",
+    "author": "John Doe",
+    "reviews": {
+      "user1": "Great book"
+    }
+  },
+  "9780002": {
+    "isbn": "9780002",
+    "title": "Express Guide",
+    "author": "Jane Smith",
+    "reviews": {}
+  }
+}
