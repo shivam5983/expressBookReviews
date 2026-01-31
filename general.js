@@ -1,32 +1,34 @@
 const axios = require("axios");
 
-/* Get all books */
+const BASE_URL = "http://localhost:5000";
+
+// Get all books
 async function getAllBooks() {
-  const res = await axios.get("http://localhost:5000/books");
-  console.log(res.data);
+  const response = await axios.get(`${BASE_URL}/books`);
+  return response.data;
 }
 
-/* Get by ISBN */
-async function getByISBN(isbn) {
-  const res = await axios.get(`http://localhost:5000/books/isbn/${isbn}`);
-  console.log(res.data);
+// Get book by ISBN
+async function getBookByISBN(isbn) {
+  const response = await axios.get(`${BASE_URL}/books/isbn/${isbn}`);
+  return response.data;
 }
 
-/* Get by Author */
-async function getByAuthor(author) {
-  const res = await axios.get(`http://localhost:5000/books/author/${author}`);
-  console.log(res.data);
+// Get books by author
+async function getBooksByAuthor(author) {
+  const response = await axios.get(`${BASE_URL}/books/author/${author}`);
+  return response.data;
 }
 
-/* Get by Title */
-async function getByTitle(title) {
-  const res = await axios.get(`http://localhost:5000/books/title/${title}`);
-  console.log(res.data);
+// Get books by title
+async function getBooksByTitle(title) {
+  const response = await axios.get(`${BASE_URL}/books/title/${title}`);
+  return response.data;
 }
 
 module.exports = {
   getAllBooks,
-  getByISBN,
-  getByAuthor,
-  getByTitle
+  getBookByISBN,
+  getBooksByAuthor,
+  getBooksByTitle,
 };
